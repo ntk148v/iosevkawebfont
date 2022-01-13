@@ -4,7 +4,7 @@ The [issue](https://github.com/google/fonts/issues/559) to add Iosevka font does
 
 ## How to use
 
-- Add `<link href="https://ntk148v.github.io/iosevka-webfont/latest/iosevka.css" rel="stylesheet" />`. At this time, this is only the latest version hosted here (check the current latest version [here](./LATEST_RELEASE)).
+- Add `<link href="https://ntk148v.github.io/iosevkawebfont/latest/iosevka.css" rel="stylesheet" />`. At this time, this is only the latest version hosted here (check the current latest version [here](./LATEST_RELEASE)).
 - Use `fontFamily: 'Iosevka Web'` or `font-family: 'Iosevka Web'`.
 
 ## How to update
