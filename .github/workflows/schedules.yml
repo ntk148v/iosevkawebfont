@@ -1,0 +1,27 @@
+name: update release
+on:
+  workflow_dispatch:
+  schedule:
+  - cron: 30 0 * * *
+jobs:
+  update-release:
+    name: update release
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Run update script
+      run: |
+        bash get-fonts.sh
+      shell: bash
+
+    - name: Commit and push changes
+      uses: github-actions-x/commit@v2.8
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        push-branch: 'master'
+        commit-message: 'Update new release'
+        force-add: 'true'
+        rebase: 'true'
+        email: 'kiennt2609@gmail.com'
+        name: 'Kien Nguyen-Tuan'
