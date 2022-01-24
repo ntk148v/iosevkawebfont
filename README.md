@@ -1,6 +1,6 @@
 # Iosevka webfont
 
-The [issue](https://github.com/google/fonts/issues/559) to add Iosevka font doesn't seem to be processed. Therefore, I create my own Iosevka webfont hosting using Github Page (inspired by [Pvinis](https://github.com/pvinis/iosevka-webfont)).
+The [issue](https://github.com/google/fonts/issues/559) to add [Iosevka font](https://github.com/be5invis/Iosevka) doesn't seem to be processed. Therefore, I create my own Iosevka webfont hosting using Github Page (inspired by [Pvinis](https://github.com/pvinis/iosevka-webfont)).
 
 ## How to use
 
