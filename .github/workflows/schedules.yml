@@ -8,16 +8,14 @@ jobs:
     name: update release
     runs-on: ubuntu-latest
     steps:
+    - name: Set safe directory
+      run: git config --global safe.directory /github/workspace
+    
     - uses: actions/checkout@v2
 
     - name: Run update script
       run: |
         bash get-fonts.sh
-      shell: bash
-      
-    - name: Set safe directory
-      run: |
-        git config --global safe.directory "$GITHUB_WORKSPACE"
       shell: bash
 
     - name: Commit and push changes
