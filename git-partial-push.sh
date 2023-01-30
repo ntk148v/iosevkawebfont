@@ -1,4 +1,14 @@
 #!/bin/bash
+if [ ! -f LATEST_RELEASE ]; then
+    echo "LATEST_RELEASE file is not found, skip..."
+    exit 1
+fi
+
+# Commit LATEST_RELEASE file
+LATEST=$(cat LATEST_RELEASE)
+git add LATEST_RELEASE
+git commit -m "Add new release - $LATEST"
+
 ###################
 # Partial commits #
 ###################
@@ -7,12 +17,12 @@
 # latest/iosevka
 # latest/iosevka-term
 # ...
-untracked_dirs=$(git ls-files --others --exclude-standard latest | cut -d/ -f-2 | uniq)
+UNTRACKED_DIRS=$(git ls-files --others --exclude-standard latest | cut -d/ -f-2 | uniq)
 while IFS= read -r dir; do
     echo "* Commit directory $dir"
     git add $dir
-    git commit -m "Add directory/file $dir"
-done < <(printf '%s\n' "$untracked_dirs")
+    git commit -m "Add new release $LATEST: directory/file $dir"
+done < <(printf '%s\n' "$UNTRACKED_DIRS")
 
 ################
 # Partial push #
@@ -20,9 +30,7 @@ done < <(printf '%s\n' "$untracked_dirs")
 # Adjust the following variables as necessary
 REMOTE="${1:-origin}"
 BRANCH="${2:-$(git rev-parse --abbrev-ref HEAD)}"
-BATCH_SIZE="${3:-5}"
-
-echo $REMOTE
+BATCH_SIZE="${3:-20}"
 
 # check if the branch exists on the remote
 if git show-ref --quiet --verify refs/remotes/$REMOTE/$BRANCH; then
