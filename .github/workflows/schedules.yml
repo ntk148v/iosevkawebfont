@@ -28,12 +28,8 @@ jobs:
         shell: bash
 
       - name: Commit and push changes
-        uses: github-actions-x/commit@v2.9
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          push-branch: 'master'
-          commit-message: 'Update new release'
-          force-add: 'true'
-          rebase: 'true'
-          email: 'kiennt2609@gmail.com'
-          name: 'Kien Nguyen-Tuan'
+        shell: bash
+        run: |
+          git config --global user.name "Kien Nguyen Tuan"
+          git config --global user.email "kiennt2609@gmail.com"
+          bash git-partial-push.sh
