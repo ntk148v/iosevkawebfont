@@ -17,9 +17,9 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
-          python-version: 3.10
+          python-version: '3.10'
 
       - name: Run update script
         run: |
@@ -31,9 +31,9 @@ jobs:
         uses: github-actions-x/commit@v2.9
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          push-branch: "master"
-          commit-message: "Update new release"
-          force-add: "true"
-          rebase: "true"
-          email: "kiennt2609@gmail.com"
-          name: "Kien Nguyen-Tuan"
+          push-branch: 'master'
+          commit-message: 'Update new release'
+          force-add: 'true'
+          rebase: 'true'
+          email: 'kiennt2609@gmail.com'
+          name: 'Kien Nguyen-Tuan'
