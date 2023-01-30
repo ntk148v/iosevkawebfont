@@ -3,6 +3,7 @@ import asyncio
 import io
 import os
 import pathlib
+import shutil
 import ssl
 import zipfile
 
@@ -14,11 +15,12 @@ async def fetch_asset(session: aiohttp.ClientSession, release: str,
     print(f"* Downloading asset {asset_name}")
     async with session.get(asset_download_url) as resp:
         zip_resp = await resp.read()
-
         z = zipfile.ZipFile(io.BytesIO(zip_resp))
-        folder = asset_name.strip(".zip").strip(f"-{release}")
-        return z.extractall(f"latest/{folder}")
-
+        # Preprocess folder name, for example:
+        # webfont-iosevka-17.1.0.zip -> iosevka
+        folder = asset_name.strip(".zip").strip(f"-{release}").strip("webfont-")
+        z.extractall(f"latest/{folder}")
+        print(f" Downloaded asset {asset_name} and extracted to latest/{folder}")
 
 async def fetch():
     headers = {
@@ -51,6 +53,7 @@ async def fetch():
                         return
 
             print(f"Fetching Iosevka release {latest['tag_name']}...")
+
             for asset in latest["assets"]:
                 # Filter webfont
                 if "webfont" in asset["name"]:
