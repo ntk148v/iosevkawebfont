@@ -17,8 +17,8 @@ async def fetch_asset(session: aiohttp.ClientSession, release: str,
         z = zipfile.ZipFile(io.BytesIO(zip_resp))
         # Preprocess folder name, for example:
         # webfont-iosevka-17.1.0.zip -> iosevka
-        folder = asset_name.strip(".zip").\
-            strip(f"-{release}").strip("webfont-")
+        folder = asset_name.removeprefix("webfont-").\
+            removesuffix(f"-{release}.zip")
         z.extractall(f"latest/{folder}")
         print(f"  Downloaded asset {asset_name} "
               f"and extracted to latest/{folder}")
