@@ -34,8 +34,10 @@ jobs:
         run: |
           sudo swapoff -a
           sudo rm -f /swapfile
-          sudo apt clean
+          sudo apt autoclean -y
+          sudo apt autoremove -y
           docker rmi $(docker image ls -aq)
+          docker system prune -af
           df -h
       - name: Setup Pages
         uses: actions/configure-pages@v3
