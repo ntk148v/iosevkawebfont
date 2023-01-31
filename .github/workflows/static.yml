@@ -30,6 +30,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Free disk space
+        run: |
+          sudo swapoff -a
+          sudo rm -f /swapfile
+          sudo apt clean
+          docker rmi $(docker image ls -aq)
+          df -h
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
